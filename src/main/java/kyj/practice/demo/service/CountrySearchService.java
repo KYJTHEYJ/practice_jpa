@@ -1,8 +1,11 @@
 package kyj.practice.demo.service;
 
+import kyj.practice.demo.dto.CountryAllInfoResponse;
 import kyj.practice.demo.dto.CountryAndCapitalInfoResponse;
 import kyj.practice.demo.dto.CountryInfoResponse;
+import kyj.practice.demo.dto.CountrySearchCondition;
 import kyj.practice.demo.entity.Country;
+import kyj.practice.demo.repository.CountrySelectQueryRepository;
 import kyj.practice.demo.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CountrySearchService {
     private final CountryRepository countryRepository;
+    private final CountrySelectQueryRepository countryQueryRepository;
 
     public List<CountryAndCapitalInfoResponse> getAllCountryNameAndCapitalName() {
         return countryRepository.getCountryNameAndCapitalName().stream()
@@ -31,5 +35,13 @@ public class CountrySearchService {
         return sliceCountryInfo.map(result -> new CountryInfoResponse(
                 result.getCode(), result.getName()
         ));
+    }
+
+    public List<CountryAllInfoResponse> getCountryAllInfo() {
+        return countryQueryRepository.findAll();
+    }
+
+    public CountryAllInfoResponse getCountryInfo(CountrySearchCondition condition) {
+        return countryQueryRepository.findByCode(condition);
     }
 }

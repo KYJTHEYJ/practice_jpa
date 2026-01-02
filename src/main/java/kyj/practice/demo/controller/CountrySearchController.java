@@ -1,7 +1,10 @@
 package kyj.practice.demo.controller;
 
+import kyj.practice.demo.dto.CountryAllInfoResponse;
 import kyj.practice.demo.dto.CountryAndCapitalInfoResponse;
 import kyj.practice.demo.dto.CountryInfoResponse;
+import kyj.practice.demo.dto.CountrySearchCondition;
+import kyj.practice.demo.entity.Country;
 import kyj.practice.demo.service.CountrySearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -33,5 +36,15 @@ public class CountrySearchController {
         // 페이지 번호, 한 페이지당 요소 크기
         Pageable pageable = PageRequest.of(page, pageSize);
         return ResponseEntity.status(HttpStatus.OK).body(countrySearchService.getCountryInfo(pageable));
+    }
+
+    @GetMapping("/api/countryAllInfos")
+    public ResponseEntity<List<CountryAllInfoResponse>> getCountryAllInfoByQueryDsl() {
+        return ResponseEntity.status(HttpStatus.OK).body(countrySearchService.getCountryAllInfo());
+    }
+
+    @GetMapping("/api/countryInfos")
+    public ResponseEntity<CountryAllInfoResponse> getCountryAllInfoByQueryDsl(CountrySearchCondition condition) {
+        return ResponseEntity.status(HttpStatus.OK).body(countrySearchService.getCountryInfo(condition));
     }
 }

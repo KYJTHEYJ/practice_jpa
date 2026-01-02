@@ -51,3 +51,6 @@ out/
 
 ### profile ###
 application-*.properties
+
+### QueryDSL ###
+/src/main/generated/

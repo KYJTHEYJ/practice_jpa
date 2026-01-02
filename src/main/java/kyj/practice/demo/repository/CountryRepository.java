@@ -19,6 +19,8 @@ public interface CountryRepository extends JpaRepository<Country, String> {
            , nativeQuery = true)
     List<Object[]> getCountryNameAndCapitalName();
 
+
+
     @Query("SELECT c FROM Country c ORDER BY c.name DESC")
     Slice<Country> findAllSlice(Pageable pageable);
 }
