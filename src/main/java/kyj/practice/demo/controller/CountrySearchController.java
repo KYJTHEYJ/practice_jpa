@@ -4,9 +4,9 @@ import kyj.practice.demo.dto.CountryAllInfoResponse;
 import kyj.practice.demo.dto.CountryAndCapitalInfoResponse;
 import kyj.practice.demo.dto.CountryInfoResponse;
 import kyj.practice.demo.dto.CountrySearchCondition;
-import kyj.practice.demo.entity.Country;
 import kyj.practice.demo.service.CountrySearchService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class CountrySearchController {
@@ -45,6 +46,7 @@ public class CountrySearchController {
 
     @GetMapping("/api/countryInfos")
     public ResponseEntity<CountryAllInfoResponse> getCountryAllInfoByQueryDsl(CountrySearchCondition condition) {
+        log.trace(condition.toString());
         return ResponseEntity.status(HttpStatus.OK).body(countrySearchService.getCountryInfo(condition));
     }
 }
