@@ -21,7 +21,7 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "posting_id"
             , nullable = false
-            , foreignKey = @ForeignKey(name = "fk_postings_comment", value = ConstraintMode.NO_CONSTRAINT))
+            , foreignKey = @ForeignKey(name = "fk_postings_comment"/*, value = ConstraintMode.NO_CONSTRAINT*/))
     private Posting posting;
 
     public Comment(String content, Posting posting) {
